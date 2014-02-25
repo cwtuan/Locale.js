@@ -21,7 +21,7 @@ limitations under the License.
  */
 
 var Locale = {
-	langUrls : [ 'app/locale/lang_en_US.properties', 'app/locale/lang_zh_CN.properties', 'app/locale/lang_zh_TW.properties' ],
+	langUrls : [ 'langs/lang_en_US.properties', 'langs/lang_zh_TW.properties' ],	
 	hasKey : function(key) {
 		return this.map[key] != null;
 	},
