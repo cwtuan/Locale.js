@@ -4,7 +4,10 @@
 
 <head>
     <script src="locale.js"></script>
-    <script>Locale.load();</script>
+    <script>
+        Locale.setLanguage('en_US');
+        Locale.load();
+    </script>
 
     <script type="text/javascript">
         document.write(Locale.getMsg('sayHello', 'Tony', 'tony@example.com'));

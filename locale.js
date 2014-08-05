@@ -41,44 +41,14 @@ var Locale = {
         return key + '.UNDEFINED';
         // return this.map[key] ? this.map[key] : key + '.undefined';
     },
-    setLanguage: function(lang) {
+    setLanguage: function(lang) {        
+        this.lang = lang;        
+    },
+    /**
+     * save language in cookie
+     */
+    saveLanguage: function(lang) {
         this._setCookie('lang', lang);
-    },
-    _setCookie: function(name, value) {
-        document.cookie = name + "=" + escape(value);
-    },
-    _getCookie: function(name) {
-        var arg = name + "=",
-            alen = arg.length,
-            clen = document.cookie.length,
-            i = 0,
-            j = 0;
-        while(i < clen) {
-            j = i + alen;
-            if(document.cookie.substring(i, j) == arg) {
-                return this._getCookieVal(j);
-            }
-            i = document.cookie.indexOf(" ", i) + 1;
-            if(i === 0) {
-                break;
-            }
-        }
-        return null;
-    },
-    _getCookieVal: function(offset) {
-        var endstr = document.cookie.indexOf(";", offset);
-        if(endstr == -1) {
-            endstr = document.cookie.length;
-        }
-        return unescape(document.cookie.substring(offset, endstr));
-    },
-    getLanguage: function() {
-        // 1..url 2. cookies 3. _guessLanguage 4. default (the first lang)
-        var language = this._getQueryParam(location.search, 'lang') || this._getCookie('lang') || this._guessLanguage();
-        return this._formatLang(language);
-    },
-    _guessLanguage: function() {
-        return(navigator.language || navigator.browserLanguage || navigator.userLanguage);
     },
     load: function() {
         var me = this;
@@ -121,6 +91,42 @@ var Locale = {
         // if preferred language is not listed in langUrls, just use the first one
         xmlhttp.open("GET", me.langUrls[0] + '?' + this._getRandParam(), false);
         xmlhttp.send();
+    },
+    _setCookie: function(name, value) {
+        document.cookie = name + "=" + escape(value);
+    },
+    _getCookie: function(name) {
+        var arg = name + "=",
+            alen = arg.length,
+            clen = document.cookie.length,
+            i = 0,
+            j = 0;
+        while(i < clen) {
+            j = i + alen;
+            if(document.cookie.substring(i, j) == arg) {
+                return this._getCookieVal(j);
+            }
+            i = document.cookie.indexOf(" ", i) + 1;
+            if(i === 0) {
+                break;
+            }
+        }
+        return null;
+    },
+    _getCookieVal: function(offset) {
+        var endstr = document.cookie.indexOf(";", offset);
+        if(endstr == -1) {
+            endstr = document.cookie.length;
+        }
+        return unescape(document.cookie.substring(offset, endstr));
+    },
+    getLanguage: function() {
+        // 0. setLanguage() 1.url 2. cookies 3. _guessLanguage 4. default (the first lang)
+        var language = this.lang || this._getQueryParam(location.search, 'lang') || this._getCookie('lang') || this._guessLanguage();
+        return this._formatLang(language);
+    },
+    _guessLanguage: function() {
+        return(navigator.language || navigator.browserLanguage || navigator.userLanguage);
     },
     // _buildURL : function() {
     // // Ex: "app/locale/Application-en_US.txt?_dc=1378102793941"
