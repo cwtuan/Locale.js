@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
-<title>Locale.js Demo</title>
+    <title>Locale.js Demo</title>
+    
+    <head>
+        <script src="locale.js"></script>
+        <script type="text/javascript">
+            var lang;
+            Locale.setLanguageUrls(['langs/lang_en_US.properties', 'langs/lang_zh_TW.properties']);
 
-<head>
-    <script src="locale.js"></script>
-    <script>
-        Locale.setLanguage('en_US');
-        Locale.load();
-    </script>
+            // lang = 'en_US';
+            // Locale.useLanguage(lang);
+            // Locale.load();
+            // document.write(lang + ': ' + Locale.getMsg('common.hello', 'Tony', 'tony@example.com') + '<BR/>');
 
-    <script type="text/javascript">
-        document.write(Locale.getMsg('sayHello', 'Tony', 'tony@example.com'));
-    </script>
-
-</head>
-
-
-
-
-<body>
-
-</body>
+            lang = 'zh_TW';
+            Locale.useLanguage(lang);
+            Locale.load();
+            document.write(lang + ': ' + Locale.getMsg('common.hello', 'Tony', 'tony@example.com') + '<BR/>');
+        </script>
+    </head>
+    
+    <body></body>
 
 </html>
