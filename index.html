@@ -3,15 +3,17 @@
     <title>Locale.js Demo</title>
     
     <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
         <script src="locale.js"></script>
         <script type="text/javascript">
             var lang;
-            Locale.setLanguageUrls(['langs/lang_en_US.properties', 'langs/lang_zh_TW.properties']);
+            Locale.setLanguageUrls(['langs/lang_en_US.txt', 'langs/lang_zh_TW.txt']);
 
-            // lang = 'en_US';
-            // Locale.useLanguage(lang);
-            // Locale.load();
-            // document.write(lang + ': ' + Locale.getMsg('common.hello', 'Tony', 'tony@example.com') + '<BR/>');
+            lang = 'en_US';
+            Locale.useLanguage(lang);
+            Locale.load();
+            document.write(lang + ': ' + Locale.getMsg('common.hello', 'Tony', 'tony@example.com') + '<BR/>');
 
             lang = 'zh_TW';
             Locale.useLanguage(lang);
