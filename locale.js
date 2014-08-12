@@ -1,5 +1,5 @@
 /*
-Copyright [2013] [Tony Tuan]
+Copyright [2014] [Tony Tuan]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -12,18 +12,11 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
- */
-/*
- * Locale.getMsg('key', param1, param2, ....);
- * Ex: Locale.getMsg("Hi, My name is {0}. My email is {1}", "Tony", "tony@example.com");
- * It will show "Hi, My name is Tony. My email is tony@example.com".
- */
+*/
+
 
 var Locale = (function() {
-	"use strict";
 
-
-	// interface
 	var Module = {
 		setLanguageUrls: setLanguageUrls,
 		getMsg: getMsg,
@@ -32,21 +25,17 @@ var Locale = (function() {
 		saveLanguage: saveLanguage,
 		hasKey: hasKey,
 		load: load
-
 	};
-
-
-
-
 
 	function setLanguageUrls(langUrls) {
 		this.langUrls = langUrls;
 	}
 
 	function getMsg(key) {
+		var args, i;
+
 		if (this.map[key]) {
-			var args = [],
-				i;
+			args = [];
 			if (arguments.length == 1) {
 				return this.map[key];
 			}
@@ -71,17 +60,15 @@ var Locale = (function() {
 		_setCookie('lang', lang);
 	}
 
-
-
 	function hasKey(key) {
 		return this.map[key] !== null;
 	}
 
-
 	function load() {
-		var me = this;
+		var me = this,
+			xmlhttp, ines, i, first, key, value, lang;
 		this.map = {};
-		var xmlhttp;
+
 		if (window.XMLHttpRequest) {
 			// for IE7+, Firefox, Chrome, Opera, Safari
 			xmlhttp = new XMLHttpRequest();
@@ -92,22 +79,21 @@ var Locale = (function() {
 		}
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				var lines = xmlhttp.responseText.split(/\r\n|\r|\n/g);
-				for (var i = 0; i < lines.length; ++i) {
-					var first = lines[i].indexOf('=');
-					var key = lines[i].substr(0, first);
-					var value = lines[i].substr(first + 1);
+				lines = xmlhttp.responseText.split(/\r\n|\r|\n/g);
+				for (i = 0; i < lines.length; ++i) {
+					first = lines[i].indexOf('=');
+					key = lines[i].substr(0, first);
+					value = lines[i].substr(first + 1);
 					if (key && value) {
-						value = value.replace(/\r/g, '');
-						value = value.replace(/\n/g, '');
+						value = value.replace(/\r/g, '').replace(/\n/g, '');
 						me.map[key] = value;
 					}
 				}
 			}
 		};
 		// Preventing Open Redirection Attacks
-		var lang = _getLanguage.call(this); 
-		for (var i = 0, len = this.langUrls.length; i < len; i++) {
+		lang = _getLanguage.call(this);
+		for (i = 0, len = this.langUrls.length; i < len; i++) {
 			if (this.langUrls[i].indexOf(lang) !== -1) {
 				xmlhttp.open("GET", this.langUrls[i] + '?' + _getRandParam(), false);
 				xmlhttp.send();
@@ -120,24 +106,24 @@ var Locale = (function() {
 	}
 
 	function _setCookie(name, value) {
-		document.cookie = name + "=" + escape(value);
+		document.cookie = name + "=" + encodeURIComponent(value);
 	}
 
 	function _getCookie(name) {
 		var arg = name + "=",
-			alen = arg.length,
-			clen = document.cookie.length,
 			i = 0,
-			j = 0;
-		while (i < clen) {
-			j = i + alen;
-			if (document.cookie.substring(i, j) == arg) {
+			j = 0,
+			nameIndex;
+		while (i < document.cookie.length) {
+			j = i + arg.length;
+			if (document.cookie.substring(i, j) === arg) {
 				return _getCookieVal.call(this, j);
 			}
-			i = document.cookie.indexOf(" ", i) + 1;
-			if (i === 0) {
-				break;
+			nameIndex = document.cookie.indexOf(" ", i);
+			if (nameIndex === -1) {
+				return null;
 			}
+			i = 1 + nameIndex;
 		}
 		return null;
 	}
@@ -147,17 +133,14 @@ var Locale = (function() {
 		if (endstr == -1) {
 			endstr = document.cookie.length;
 		}
-		return unescape(document.cookie.substring(offset, endstr));
+		return encodeURIComponent(document.cookie.substring(offset, endstr));
 	}
 
-
 	function _getLanguage() {
-
-		// 0. setLanguage() 1.url 2. cookies 3. _guessLanguage 4. default (the first lang)
+		// 0. setLanguage() 1.url param 2. cookies 3. _guessLanguage 4. default (the first lang)
 		var language = this.lang || _getQueryParam(location.search, 'lang') || _getCookie('lang') || _guessLanguage();
 		return _formatLang(language);
 	}
-
 
 	function _guessLanguage() {
 		return (navigator.language || navigator.browserLanguage || navigator.userLanguage);
@@ -175,16 +158,14 @@ var Locale = (function() {
 		return lang[0].toLowerCase() + '_' + lang[1].toUpperCase();
 	}
 
-
-	// _getQueryParam('/?lang=zh-TW&debug=true', 'lang') will return 'zh-TW'
-
 	function _getQueryParam(queryString, target) {
+		var params, i, param;
 		queryString = location.search.split('?')[1];
 		if (queryString) {
-			var params = queryString.split('&');
+			params = queryString.split('&');
 			if (params) {
-				for (var i = 0; i < params.length; ++i) {
-					var param = params[i].split('=');
+				for (i = 0; i < params.length; ++i) {
+					param = params[i].split('=');
 					if (param[0] === target) return param[1];
 				}
 			}
