@@ -7,5 +7,6 @@ jshint
 glup
 compress
 qunit
+requirejs
 
 https://github.com/rstacruz/nprogress
