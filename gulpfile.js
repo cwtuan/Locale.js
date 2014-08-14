@@ -13,8 +13,3 @@ gulp.task('minify-js', function() {
 
    
 });
-
-//   gulp.src('./dist/assets/css/main.css')
-//         .pipe(minifycss())
-//         .pipe(rename('main.min.css'))
-//         .pipe(gulp.dest('./dist/assets/css/'));
