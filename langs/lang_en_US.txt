@@ -1,1 +1,0 @@
-common.hello=Hi, My name is {0}. My email is {1}

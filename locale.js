@@ -1,5 +1,6 @@
 /*
-Copyright [2014] [Tony Tuan]
+@author Tony Tuan <dmitrychleck@gmail.com>
+@url https://github.com/chleck/locale-js
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

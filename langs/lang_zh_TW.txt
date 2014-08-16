@@ -1,1 +1,0 @@
-common.hello=嗨, 我的名子是{0}, 我的email是{1}
