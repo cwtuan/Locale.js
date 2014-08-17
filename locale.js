@@ -17,6 +17,7 @@ limitations under the License.
 
 
 var Locale = (function() {
+	"use strict";
 
 	var Module = {
 		setLanguageUrls: setLanguageUrls,
@@ -25,7 +26,8 @@ var Locale = (function() {
 		// save language in cookie
 		saveLanguage: saveLanguage,
 		hasKey: hasKey,
-		load: load
+		loadSync: loadSync,
+		loadAsync: loadAsync
 	};
 
 	function setLanguageUrls(langUrls) {
@@ -65,10 +67,30 @@ var Locale = (function() {
 		return this.map[key] !== null;
 	}
 
-	function load() {
+	function loadSync() {
+		_load.call(this, false);
+	}
+
+	function loadAsync(callback) {
+		_load.call(this, true, callback);
+	}
+
+	function _load(async, callback) {
 		var me = this,
-			xmlhttp, ines, i, first, key, value, lang;
+			xmlhttp,
+			lines,
+			i,
+			first,
+			key,
+			value,
+			lang,
+			selectedLangUrl,
+			len;
 		this.map = {};
+
+		if (!this.langUrls) {
+			console.error('You should call setLanguageUrls() before loading lagnuage file.');
+		}
 
 		if (window.XMLHttpRequest) {
 			// for IE7+, Firefox, Chrome, Opera, Safari
@@ -91,18 +113,22 @@ var Locale = (function() {
 					}
 				}
 			}
+
+			if (async) {
+				callback();
+			}
 		};
 		// Preventing Open Redirection Attacks
 		lang = _getLanguage.call(this);
 		for (i = 0, len = this.langUrls.length; i < len; i++) {
 			if (this.langUrls[i].indexOf(lang) !== -1) {
-				xmlhttp.open("GET", this.langUrls[i] + '?' + _getRandParam(), false);
-				xmlhttp.send();
-				return;
+				selectedLangUrl = this.langUrls[i];
+				break;
 			}
 		}
-		// if preferred language is not listed in langUrls, just use the first one
-		xmlhttp.open("GET", me.langUrls[0] + '?' + _getRandParam(), false);
+		// if preferred language is not listed in langUrls, just use the first one		
+		selectedLangUrl = selectedLangUrl || me.langUrls[0];
+		xmlhttp.open("GET", selectedLangUrl + '?' + _getRandParam(), async);
 		xmlhttp.send();
 	}
 
