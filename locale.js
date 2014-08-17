@@ -112,11 +112,12 @@ var Locale = (function() {
 						me.map[key] = value;
 					}
 				}
+
+				if (async) {
+					callback();
+				}
 			}
 
-			if (async) {
-				callback();
-			}
 		};
 		// Preventing Open Redirection Attacks
 		lang = _getLanguage.call(this);
