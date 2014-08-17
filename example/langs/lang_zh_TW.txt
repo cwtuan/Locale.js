@@ -1,0 +1,2 @@
+common.hi=嗨,你今天好嗎?
+common.introduction=哈囉,我的名子是{0}, 我的email是{1}

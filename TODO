@@ -1,8 +1,9 @@
 async
 blog: interface, no implementation
 var at begining
-nodejs
 -----tool
+minify-js: keep license  statement
+nodejs
 npm bower
 jshint
 glup

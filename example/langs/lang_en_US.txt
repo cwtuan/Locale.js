@@ -1,0 +1,2 @@
+common.hi=Hi, how are you today?
+common.introduction=Hello, My name is {0}. My email is {1}

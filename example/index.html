@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<title>Locale.js Demo</title>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--<script src="../dist/locale.min.js"></script>-->
+    <script src="../locale.js"></script>
+
+    <script type="text/javascript">
+        Locale.setLanguageUrls(['langs/lang_en_US.txt', 'langs/lang_zh_TW.txt']);
+
+        function onLanguageSelected(lang) {
+            Locale.useLanguage(lang);
+        //    debugger;
+            Locale.loadAsync(function() {
+                console.log('done....',(new Date()).getTime());
+                document.getElementById('hi').innerHTML = Locale.getMsg('common.hi');
+                document.getElementById('introduction').innerHTML = Locale.getMsg('common.introduction', 'Tony', 'tony@example.com');
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <select onChange="onLanguageSelected(this.options[this.selectedIndex].value);">
+        <option value="#">Language</option>
+        <option value="en_US">English</option>
+        <option value="zh_TW">Traditional Chinese</option>
+    </select>
+
+    <div id="hi">11</div>
+    <div id="introduction">22</div>
+
+
+</body>
+
+</html>
