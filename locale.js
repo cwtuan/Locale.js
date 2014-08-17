@@ -22,6 +22,7 @@ var Locale = (function() {
 	var Module = {
 		setLanguageUrls: setLanguageUrls,
 		getMsg: getMsg,
+	
 		useLanguage: useLanguage,
 		// save language in cookie
 		saveLanguage: saveLanguage,
@@ -99,7 +100,7 @@ var Locale = (function() {
 		else {
 			// for IE6, IE5
 			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
+		} 
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 				lines = xmlhttp.responseText.split(/\r\n|\r|\n/g);

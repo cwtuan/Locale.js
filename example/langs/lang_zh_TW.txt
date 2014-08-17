@@ -1,2 +1,2 @@
-common.hi=嗨,你今天好嗎?
-common.introduction=哈囉,我的名子是{0}, 我的email是{1}
+introudction=Locale.js是一個容易上手的Javascript的語系轉換工具
+welcome=歡迎來到<a href="{0}" target="_blank">{0}</a>, 你選的語言是"{1}"

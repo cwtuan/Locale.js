@@ -1,4 +1,4 @@
-async
+
 blog: interface, no implementation
 var at begining
 -----tool
@@ -6,9 +6,15 @@ minify-js: keep license  statement
 nodejs
 npm bower
 jshint
-glup
 compress
 qunit
 requirejs
 
 https://github.com/rstacruz/nprogress
+
+---md--
+async
+
+--fix--
+bootstrap for firstElement
+auto load lang at first load
