@@ -5,11 +5,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <link href="css/demo.css" rel="stylesheet" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/demo.css" rel="stylesheet" type="text/css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!--<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
 
+ 
     <!--<script src="../dist/locale.min.js"></script>-->
     <script src="../locale.js"></script>
     <script src="js/demo.js"></script>
@@ -18,7 +19,7 @@
 
     <script type="text/javascript">
         Locale.setLanguageUrls(['langs/lang_en_US.txt', 'langs/lang_zh_TW.txt']);
-        // onLanguageSelected();
+         // onLanguageSelected();
     </script>
 </head>
 
@@ -30,10 +31,14 @@
         <option value="zh_TW">Traditional Chinese</option>
     </select>
 
-    <div id="content" style="display:none">
+    <div id="content">
+    <!--style="display:none"-->
+    
         <h1>Locale.js<small> A Standalone JavaScript Localization Library</small></h1>
-        <div id="firstElement" clsss="alert alert-info"></div>
-        <div id="sencodElement" class="alert alert-info"></div>
+        <div id="firstElement" class="alert alert-info">fff</div>
+        <div id="sencodElement" class="alert alert-success">11</div>
+        
+    
     </div>
 
     <div id="loadingMask" style="display:none">

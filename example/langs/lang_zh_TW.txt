@@ -1,2 +1,2 @@
-introudction=Locale.js是一個容易上手的Javascript的語系轉換工具
+introudction=Locale.js是一個容易上手的Javascript的多國語系工具。不依賴其他JS套件，程式本身僅有2kb左右(壓縮版)
 welcome=歡迎來到<a href="{0}" target="_blank">{0}</a>, 你選的語言是"{1}"
