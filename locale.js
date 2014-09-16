@@ -22,10 +22,11 @@ var Locale = (function() {
 	var Module = {
 		setLanguageUrls: setLanguageUrls,
 		getMsg: getMsg,
-	
-		useLanguage: useLanguage,
+
+		setCurrentLanguage: setCurrentLanguage,
 		// save language in cookie
 		saveLanguage: saveLanguage,
+		getCurrentLanguage: getCurrentLanguage,
 		hasKey: hasKey,
 		loadSync: loadSync,
 		loadAsync: loadAsync
@@ -56,8 +57,14 @@ var Locale = (function() {
 		// return this.map[key] ? this.map[key] : key + '.undefined';
 	}
 
-	function useLanguage(lang) {
-		this.lang = lang;
+	function setCurrentLanguage(lang) {
+		this.currentLang = lang;
+	}
+
+	function getCurrentLanguage() {
+		// 0. setCurrentLanguage() 1.url param 2. cookies 3. _guessLanguage 4. default (the first lang)
+		var language = this.currentLang || _getQueryParam(location.search, 'lang') || _getCookie('lang') || _guessLanguage();
+		return _formatLang(language);
 	}
 
 	function saveLanguage(lang) {
@@ -100,7 +107,7 @@ var Locale = (function() {
 		else {
 			// for IE6, IE5
 			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		} 
+		}
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 				lines = xmlhttp.responseText.split(/\r\n|\r|\n/g);
@@ -121,7 +128,7 @@ var Locale = (function() {
 
 		};
 		// Preventing Open Redirection Attacks
-		lang = _getLanguage.call(this);
+		lang = getCurrentLanguage.call(this);
 		for (i = 0, len = this.langUrls.length; i < len; i++) {
 			if (this.langUrls[i].indexOf(lang) !== -1) {
 				selectedLangUrl = this.langUrls[i];
@@ -165,11 +172,7 @@ var Locale = (function() {
 		return encodeURIComponent(document.cookie.substring(offset, endstr));
 	}
 
-	function _getLanguage() {
-		// 0. setLanguage() 1.url param 2. cookies 3. _guessLanguage 4. default (the first lang)
-		var language = this.lang || _getQueryParam(location.search, 'lang') || _getCookie('lang') || _guessLanguage();
-		return _formatLang(language);
-	}
+
 
 	function _guessLanguage() {
 		return (navigator.language || navigator.browserLanguage || navigator.userLanguage);
