@@ -1,12 +1,8 @@
-轉轉轉
-?lang 改程 #!
-
-文件：
+?lang to #!
 
 
-The most commonly used locale ID consists of two parts: language code and country code. For example, en-US, en-AU, and zh-CN are all valid locale IDs that have both language codes and country codes. 
-可自動偵測瀏覽器https://locale_js-c9-cwtuan.c9.io/example/index.html語系、由URL anchor決定、由Cookie狀態決定、直接呼叫Locale.getCurrentLanguage(..)決定
-
+## Advance API
+detecting browser language preference
 
 blog: interface, no implementation
 more lang files
