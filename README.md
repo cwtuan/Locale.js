@@ -4,7 +4,7 @@ Locale.js is a client side Javascript Localization library.
 ## Demo
 [http://opensource.tonytuan.org/locale.js/](http://opensource.tonytuan.org/locale.js/)
 
-## Example
+## Usage
 * Include Locale.js in your html
 ```html
 <html>
