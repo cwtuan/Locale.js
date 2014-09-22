@@ -9,7 +9,7 @@ Locale.js is a client side Javascript Localization library.
 ```html
 <html>
  <head>
-  <script src="js/locale.js"></script>
+  <script src="http://raw.githubusercontent.com/cwtuan/Locale.js/master/example/js/locale-1.0.min.js"></script>
  </head>
 </html>
 ```
