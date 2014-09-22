@@ -1,0 +1,6 @@
+introudction=Locale.js是一个容易上手的Javascript的多国语系库。
+feature1=不依赖其他JS库，可相容于任何Javascript项目
+feature2=程式小巧快速，本身仅有2kb左右
+feature3=可自动侦测使用者语系
+feature4=支援变数取代，例如："你的显示分辨率是{0} x {1}"
+moreInfo=教学文件请至：<a href="{0}" target="_blank">{0}</a>。

@@ -1,0 +1,11 @@
+#main {
+	font-size: 16px;
+	width: 800px;
+	height: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -200px;
+	margin-left: -400px;
+	font-family: Monospace, "Times New Roman", Times, serif;
+}
