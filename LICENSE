@@ -1,7 +1,9 @@
 /**
- * Locale.js is a client side Javascript Localization library.
- * Author: Chia-Wei Tuan
+ * Locale.js <%= version %> is a client side Javascript Localization library.
+ * Author: Chia-Wei Tuan (linkedin.com/in/cwtuan)
  * Github: https://github.com/cwtuan/Locale.js
  * Demo: http://opensource.tonytuan.org/locale.js/
  * License: Apache License
+ * Build: <%= build %>
  */
+ 
