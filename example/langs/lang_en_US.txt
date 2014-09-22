@@ -1,6 +1,6 @@
 introudction=Locale.js is an easy Javascript Localization library.
 feature1=It's a standalone library which is compatible with any JS project.
-feature2=Small (2kb) and Fast.
+feature2=Small (2KB) and Fast.
 feature3=Auto-detect default browser language.
 feature4=Arbitrary number of arguments to replace the tokenized string. For example, "Your display resolution is {0} x {1}."
 moreInfo=Tutorial and document: <a href="{0}" target="_blank">{0}</a>. 
