@@ -3,11 +3,4 @@ feature1=不依賴其他JS套件，可相容於任何Javascript專案
 feature2=程式小巧快速，本身僅有2kb左右
 feature3=可自動偵測使用者語系
 feature4=支援變數取代，例如："你的螢幕解析度是{0} x {1}"
-moreInfo=教學文件請至：<a href="{0}" target="_blank">{0}</a>
-
-
-
-
-
-
- Copyright 1999-2014 by Refsnes Data. All Rights Reserved.
+moreInfo=教學文件請至：<a href="{0}" target="_blank">{0}</a>。

@@ -8,8 +8,8 @@ gulp.task('minify-js', function() {
 
     gulp.src('./locale.js').
     pipe(uglify()).
-    pipe(rename('locale\.min\.js')).
-    pipe(gulp.dest('./dist'));
+    pipe(rename('locale-1\.0\.min\.js')).
+    pipe(gulp.dest('./example//js'));
 
    
 });
