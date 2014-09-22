@@ -1,4 +1,5 @@
 # Locale.js
+
 A simple Javascript localization tool. It translates pre-defiend key to correspending words. For example, we have two 
 
 
