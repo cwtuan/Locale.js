@@ -6,7 +6,7 @@ Locale.js is a client side Javascript Localization library.
 
 ## Example
 Include Locale.js in your html
-```JavaScript
+```html
 <html>
  <head>
   <script src="js/locale.js"></script>
@@ -14,7 +14,7 @@ Include Locale.js in your html
 </html>
 ```
 Set the supported lanauage
-```
+```javascript
 Locale.setLanguageUrls(['langs/lang_en_US.txt',
                         'langs/lang_zh_TW.txt', 
                         'langs/lang_zh_CN.txt']);
@@ -26,7 +26,7 @@ js_popular=JavaScript is one of the most popular languages on the web.
 ```
 
 Then use the API
-```
+```javascript
 // Explicitly choose a language. 
 // It's an optional step. Locale.js can auto-detect browser language.
 Locale.setCurrentLanguage('en_US'); 
