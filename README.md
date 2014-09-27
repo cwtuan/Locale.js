@@ -2,7 +2,9 @@
 Locale.js is a client side Javascript Localization (i18n) library.
 
 ## Demo
-[![Locale.js Demo](https://raw.githubusercontent.com/cwtuan/Locale.js/master/example/images/snapshot.jpg "Locale.js Demo")](http://opensource.tonytuan.org/locale.js/)
+<a title="Locale.js Demo" alt="Locale.js Demo" href="http://opensource.tonytuan.org/locale.js" target="_blank">
+<img src="https://raw.githubusercontent.com/cwtuan/Locale.js/master/example/images/snapshot.jpg">
+</a>
 
 
 
