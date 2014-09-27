@@ -1,5 +1,5 @@
 # Locale.js
-Locale.js is a client side Javascript Localization library.
+Locale.js is a client side Javascript Localization (i18n) library.
 
 ## Demo
 [http://opensource.tonytuan.org/locale.js/](http://opensource.tonytuan.org/locale.js/)

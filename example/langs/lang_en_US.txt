@@ -1,4 +1,4 @@
-introudction=Locale.js is an easy Javascript Localization library.
+introudction=Locale.js is an easy Javascript Localization (i18n) library.
 feature1=It's a standalone library which is compatible with any JS project.
 feature2=Small (2KB) and Fast.
 feature3=Auto-detect default browser language.
