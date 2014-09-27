@@ -2,7 +2,10 @@
 Locale.js is a client side Javascript Localization (i18n) library.
 
 ## Demo
-[http://opensource.tonytuan.org/locale.js/](http://opensource.tonytuan.org/locale.js/)
+[![Locale.js Demo](https://raw.githubusercontent.com/cwtuan/Locale.js/master/example/images/snapshot.jpg "Locale.js Demo")](http://opensource.tonytuan.org/locale.js/)
+
+
+
 
 ## Usage
 ##### Include Locale.js in your html
