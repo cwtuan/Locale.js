@@ -7,14 +7,20 @@ Locale.js is a client side Javascript Localization (i18n) library.
 </a>
 
 ## Usage
-##### Define the key-value pairs in language files.
-For example, the "lang_en_US.txt" may looks like:
+##### Define the key-value pairs in language properties.
+Create the supported language properties (For example, "lang_en_US.txt" and "lang_zh_TW.txt") in "lang" directory.
+"lang_en_US.txt":
 ```
 feature1=It's a standalone library which is compatible with any JS project.
 feature2=Small (2KB) and Fast.
 ```
+"lang_zh_TW.txt":
+```
+feature1=不依賴其他JS套件，可相容於任何Javascript專案
+feature2=程式小巧快速，本身僅有2K左右
+```
 
-##### Then use the API
+##### Code snippet 
 ```html
 <html>
 <head>
@@ -24,8 +30,7 @@ feature2=Small (2KB) and Fast.
         // Set the supported languages
         Locale.setLanguageUrls([
             'langs/lang_en_US.txt',
-            'langs/lang_zh_TW.txt',
-            'langs/lang_zh_CN.txt'
+            'langs/lang_zh_TW.txt'
         ]);
 
          // Load language property like "lang_en_US.txt"
