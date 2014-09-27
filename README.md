@@ -1,8 +1,5 @@
 # Locale.js
-* Locale.js is a client side Javascript Localization (i18n) library.
-* It's a standalone library which is compatible with any JS projects and browsers.
-* Small (2kb) and Fast.
-* Auto-detect default browser language.
+Locale.js is a client side Javascript Localization (i18n) library.
 
 ## Demo
 <a title="Locale.js Demo" alt="Locale.js Demo" href="http://opensource.tonytuan.org/locale.js" target="_blank">
