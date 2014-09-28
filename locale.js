@@ -1,69 +1,122 @@
 var Locale = (function() {
 	"use strict";
 
-	var Module = {
-		setLanguageUrls: setLanguageUrls,
-		getMsg: getMsg,
+	// public methods
+	return {
+		/**
+		 * Set the supported language properites.
+		 * @param {{String[]} langUrls The array of URLs of language properites.
+		 *                    For example, ['lang/lang_en_US', 'lang/lang_zh_TW']
+		 *                    Locale name refer to Table 1 in http://goo.gl/8BKiqm
+		 */
+		setLanguageUrls: function(langUrls) {
+			this.langUrls = langUrls;
+		},
 
-		setCurrentLanguage: setCurrentLanguage,
-		// save language in cookie
-		saveLanguage: saveLanguage,
-		getCurrentLanguage: getCurrentLanguage,
-		hasKey: hasKey,
-		loadSync: loadSync,
-		loadAsync: loadAsync
+		/**
+		 * Get the corresponding message.
+		 *
+		 * [Basic Usage]
+		 * Example: a key-value pair defined in the language property like:
+		 *  hello=Hello, how are you?
+		 * Locale.getMsg('hello'); // return the string "Hello, how are you?."
+		 *
+		 * [Advance Usage]
+		 * You can pass an arbitrary number of arguments to replace the variables.
+		 * Example, a key-value pair defined in the language property like:
+		 *  resolution="Your display resolution is {0} x {1}."
+		 * Locale.getMsg('resolution', screen.width, screen.height); // return "Your display resolution is 1024 x 768."
+		 *
+		 * @param {String} key The key defined in the language property.
+		 * @param {Mixed...} values The values to replace arbitrary number of variables `{0}`, `{1}`, ....
+		 * @return {String} The corresponding message.
+		 */
+		getMsg: function(key) {
+			var args, i;
+
+			if (this.map[key]) {
+				args = [];
+				if (arguments.length == 1) {
+					return this.map[key];
+				}
+				else { // >1
+					for (i = 1; i < arguments.length; i++) {
+						args.push(arguments[i]);
+					}
+					return this.map[key].replace(/\{(\d+)\}/g, function(m, i) {
+						return args[i];
+					});
+				}
+			}
+			return key + '.UNDEFINED';
+		},
+
+		/**
+		 * Load the language property.
+		 * Locale.js will determine the perfered lanauge by the following order:
+		 * 1. Specify a language for this session. Example: Locale.setCurrentLanguage('en_US');
+		 * 2. URL parameter. Example: http://localhost?lang=en_US
+		 * 3. Cookies: Example: Locale.saveLanguage('en_US');
+		 * 4. The browser's dafualt langauge
+		 * 5. If all of the conditions above doesn't meet, Locale.js will use the first lang defiend in Locale.setLanguageUrls([...])
+		 *
+		 * @param {function} callback The callback function which is executed when language property loaded.
+		 */
+		loadAsync: function(callback) {
+			_load.call(this, true, callback);
+		},
+
+
+		/**
+		 * Load language property in sync mode.
+		 */
+		loadSync: function() {
+			_load.call(this, false);
+		},
+
+		/**
+		 * Explicitly choose a language for this session.
+		 * @param {String} lang The locale name defined in http://goo.gl/8BKiqm
+		 */
+		setCurrentLanguage: function(lang) {
+			this.currentLang = lang;
+		},
+
+
+		/**
+		 * Save the perfered language in cookies so that Locale.js will use this language next time.
+		 * @param {String} lang The locale name defined in http://goo.gl/8BKiqm
+		 */
+		saveLanguage: function(lang) {
+			_setCookie('lang', lang);
+		},
+
+		/**
+		 * Check if a key is defined in language property.
+		 * @param {String} key The key defined in language property
+		 * @return {Boolean} True if the language property contains this key, false otherwise
+		 */
+		hasKey: function(key) {
+			return this.map[key] !== null;
+		},
+
+		/**
+		 * Get the currnet locale name.
+		 * If you'd like save the user prefred lanauge in DB, using this function to get the locale name.
+		 * So the next time when user login the website, you can retrive the user prefered lanauge from DB, 
+		 * and call locale.setCurrentLanguage(...) to restore the lanauge the user selected last time.
+		 * @return {string} currnet locale name
+		 */
+		getCurrentLanguage: function() {
+			// 1. setCurrentLanguage() 2.url param 3. cookies 4. _getBrowserLang 5. default (the first lang)
+			var language = this.currentLang || _getQueryParam(location.search, 'lang') || _getCookie('lang') || _getBrowserLang();
+			return _formatLang(language);
+		}
+
 	};
 
-	function setLanguageUrls(langUrls) {
-		this.langUrls = langUrls;
-	}
 
-	function getMsg(key) {
-		var args, i;
 
-		if (this.map[key]) {
-			args = [];
-			if (arguments.length == 1) {
-				return this.map[key];
-			}
-			else { // >1
-				for (i = 1; i < arguments.length; i++) {
-					args.push(arguments[i]);
-				}
-				return this.map[key].replace(/\{(\d+)\}/g, function(m, i) {
-					return args[i];
-				});
-			}
-		}
-		return key + '.UNDEFINED';
-		// return this.map[key] ? this.map[key] : key + '.undefined';
-	}
-
-	function setCurrentLanguage(lang) {
-		this.currentLang = lang;
-	}
-
-	function getCurrentLanguage() {
-		// 0. setCurrentLanguage() 1.url param 2. cookies 3. _guessLanguage 4. default (the first lang)
-		var language = this.currentLang || _getQueryParam(location.search, 'lang') || _getCookie('lang') || _guessLanguage();
-		return _formatLang(language);
-	}
-
-	function saveLanguage(lang) {
-		_setCookie('lang', lang);
-	}
-
-	function hasKey(key) {
-		return this.map[key] !== null;
-	}
-
-	function loadSync() {
-		_load.call(this, false);
-	}
-
-	function loadAsync(callback) {
-		_load.call(this, true, callback);
-	}
 
 	function _load(async, callback) {
 		var me = this,
@@ -110,7 +163,7 @@ var Locale = (function() {
 
 		};
 		// Preventing Open Redirection Attacks
-		lang = getCurrentLanguage.call(this);
+		lang = me.getCurrentLanguage.call(this);
 		for (i = 0, len = this.langUrls.length; i < len; i++) {
 			if (this.langUrls[i].indexOf(lang) !== -1) {
 				selectedLangUrl = this.langUrls[i];
@@ -156,7 +209,7 @@ var Locale = (function() {
 
 
 
-	function _guessLanguage() {
+	function _getBrowserLang() {
 		return (navigator.language || navigator.browserLanguage || navigator.userLanguage);
 	}
 
@@ -187,6 +240,6 @@ var Locale = (function() {
 		return null;
 	}
 
-	return Module;
+
 
 })();
