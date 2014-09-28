@@ -60,15 +60,15 @@ function setLanguageUrls(langUrls)
  * Get the corresponding message.
  *
  * [Basic Usage]
- * Example: a key-value pair defined in the language property like:
+ * For example, a key-value pair defined in the language property like:
  *  hello=Hello, how are you?
- * Locale.getMsg('hello'); // return the string "Hello, how are you?."
+ * Then, Locale.getMsg('hello'); // return the string "Hello, how are you?."
  *
  * [Advance Usage]
  * You can pass an arbitrary number of arguments to replace the variables.
- * Example, a key-value pair defined in the language property like:
+ * For example, a key-value pair defined in the language property like:
  *  resolution="Your display resolution is {0} x {1}."
- * Locale.getMsg('resolution', screen.width, screen.height); // return "Your display resolution is 1024 x 768."
+ * Then, Locale.getMsg('resolution', screen.width, screen.height); // return "Your display resolution is 1024 x 768."
  *
  * @param {String} key The key defined in the language property.
  * @param {Mixed...} values The values to replace arbitrary number of variables `{0}`, `{1}`, ....
