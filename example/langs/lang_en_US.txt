@@ -1,5 +1,5 @@
 introudction=Locale.js is an easy Javascript Localization (i18n) library.
-feature1=It's a standalone library which is compatible with any JS project.
+feature1=No 3rd party JS dependencies
 feature2=Small (2KB) and Fast.
 feature3=Auto-detect default browser language.
 feature4=Arbitrary number of arguments to replace the tokenized string. For example, "Your display resolution is {0} x {1}."
