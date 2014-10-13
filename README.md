@@ -1,5 +1,5 @@
 # Locale.js
-Locale.js is a client side Javascript Localization (i18n) library.
+Locale.js is a client side Javascript Localization (i18n) library which help you load locale files on demand in web applications.
 
 ## <a title="Click to open Locale.js demo website" alt="Locale.js Demo" href="http://opensource.tonytuan.org/locale.js" target="_blank">Demo</a>
 <a title="Click to open Locale.js demo website" alt="Locale.js Demo" href="http://opensource.tonytuan.org/locale.js" target="_blank">
@@ -127,6 +127,9 @@ function hasKey(key)
  */
 function getCurrentLanguage()
 ```
+
+### Locale Files Management
+Managing multiple locale files could be time-consuming. You may need a tool to manage them. See <a href="https://github.com/cwtuan/locale-generator/" target="_blank">Locale Generator</a> for more info.
 
 ## License	
 Apache License version 2.0
